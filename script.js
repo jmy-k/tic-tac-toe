@@ -12,17 +12,23 @@ const createPlayers = () => {
         if ($player1.value===""){
             player1Alert.style.display="block";
         }
+        else{
+          player1Alert.style.display="none";
+        }
         if ($player2.value===""){
             player2Alert.style.display="block";
         }
         else{
+          player2Alert.style.display="none";
+        }
+        if ($player1.value!=="" && $player2.value!==""){
             players.player1 = $player1.value;
             players.player2 = $player2.value;
 
             return {player1: players.player1 , player2: players.player2}
         }
       }
-      return playerNameValidate;
+      return playerNameValidate();
       
     };
     
@@ -33,9 +39,35 @@ const createPlayers = () => {
     };
 };
 
+const gamePlayers = createPlayers();
+const startGameButton = document.querySelector('#startgame');
+
+startGameButton.addEventListener('click', () => {
+  const playersData = gamePlayers.setPlayers();
+  console.log(playersData);
+});
+
 
 const gameBoard = () => {
     board = [];
+
+    game = () =>{
+      xMarker=document.createElement('div');
+      yMarker=document.createElement('div');
+      playerTurn=document.querySelector('#id');
+      turn = 0;
+
+      const gamePlayers = createPlayers();
+      const player1 = gamePlayers.getPlayer1();
+      const player2 = gamePlayers.getPlayer2();
+
+      if (turn%2===0){
+        playerTurn.textContent= player1+"'s turn"
+      }
+      else if (turn%2!==0){
+        playerTurn.textContent= player2 + "'s turn"
+      }
+    }
 }
 
 
