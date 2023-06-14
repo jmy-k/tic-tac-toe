@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Tic Tac Toe</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="title">Let's Play</div>
+    <button type="button" id="start">Start</button>
+    <form action="post" id="playerselection">
+        <fieldset>
+            <div class="player1">
+              <input type="text" name="player1" id="player1" minlength=2 placeholder="Player 1" required>
+              <div id="player1alert">Please enter a name!</div>
+              <input type="radio" name="player1-symbol" value="X" id="player1-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-X', 'player2-X', 'player2-O')">
+              <label for="player1-X">X</label>
+              <input type="radio" name="player1-symbol" value="O" id="player1-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-O', 'player2-O', 'player2-X')">
+              <label for="player1-O">O</label>
+            </div>
+            <div class="player2">
+              <input type="text" name="player2" id="player2" minlength=2 placeholder="Player 2" required>
+              <div id="player2alert">Please enter a name!</div>
+              <input type="radio" name="player2-symbol" value="X" id="player2-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-X', 'player1-X', 'player1-O')">
+              <label for="player2-X">X</label>
+              <input type="radio" name="player2-symbol" value="O" id="player2-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-O', 'player1-O', 'player1-X')">
+              <label for="player2-O">O</label>
+            </div>
+            <button type="button" id="resetselection" onclick="playerSelectionModule.resetSelection()">Reset Selection</button>
+            <button type="button" id="startgame" onclick="createPlayers()">Let's Go</button>
+        </fieldset>
+    </form>
+    <div id="gameboard">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <div id="gameend">
+        <div id="gameresult"></div>
+        <button type="button">Play again?</button>
+    </div>
+   <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+#gameboard{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+
+    height:70vh;
+    width:70vw;
+}
+
+.box{
+    border:1px solid black;
+}
+
+#gameend{
+    display:none;
+}
+
+#start{
+    display:block;
+}
+
+#player1alert , #player2alert{
+    display:none;
+}
