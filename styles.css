@@ -1,10 +1,10 @@
 #gameboard{
-    display:grid;
+    display:none;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
 
     height:70vh;
-    width:70vw;
+    width:height;
 }
 
 .box{
@@ -21,4 +21,12 @@
 
 #player1alert , #player2alert{
     display:none;
+}
+
+#player1markeralert , #player2markeralert{
+    display:none;
+}
+
+.box:hover{
+    background-color: pink;
 }
