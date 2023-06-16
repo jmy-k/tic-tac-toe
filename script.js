@@ -1,3 +1,11 @@
+
+const openPlayers = document.querySelector('#start')
+const playerForm=document.querySelector('#playerselection')
+
+openPlayers.addEventListener('click',()=>{
+  playerForm.style.display="block";
+})
+
 const createPlayers = () => {
   const players = {};
   
@@ -101,8 +109,6 @@ if (isPlayersValid && isMarkerValid) {
 
 
 const gameBoard = () => {
-  const board = [];
-
   const game = () =>{
     const playerTurn=document.querySelector('#turn');
     const gameBoxes=document.querySelectorAll('.box')
@@ -113,6 +119,9 @@ const gameBoard = () => {
     const player1Marker = playersData.markerValidate.player1Marker;
     const player2Marker = playersData.markerValidate.player2Marker;
     
+    let player1Boxes = []
+    let player2Boxes=[]
+    const valuesToFind = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
     
     let boxesleft=9
     let turn = 0;
@@ -133,30 +142,81 @@ const gameBoard = () => {
       }
     };
 
+    const gameOver=() =>{
+      const gameOverPopUp = document.querySelector('#gameover');
+      const gameResult = document.querySelector('#gameresult')
+      gameOverPopUp.style.display="block";
+      gameResult.textContent = playerTurn.textContent
+    }
+
+    const checkWinner=()=>{
+      if (boxesleft<=0){
+        playerTurn.textContent="Tie! No boxes left."
+        gameOver()
+      }
+      else{
+        const player1Wins = valuesToFind.some((subarray)=>{
+          return subarray.every((value)=>player1Boxes.includes(value))
+        })
+        const player2Wins = valuesToFind.some((subarray)=>{
+          return subarray.every((value)=>player2Boxes.includes(value))
+        })
+        if (player1Wins===true){
+          playerTurn.textContent=(player1+" wins!")
+          gameOver()
+        }
+        else if (player2Wins===true){
+          playerTurn.textContent=(player2+" wins!")
+          gameOver()
+        }
+      } 
+    }
+
     const makeMove = (box) =>{
+      checkWinner()
       const xMarker=document.createElement('div');
       xMarker.textContent="X";
       const yMarker=document.createElement('div');
       yMarker.textContent="O"
-      if (turn%2 === 0){
-        box.appendChild(xMarker)
-      }
+      
+      
+      if(!box.lastElementChild){
+      
+        if (turn%2 === 0){
+          if (player1Marker==="X"){
+            box.appendChild(xMarker)
+          }
+          else if (player1Marker==="O"){
+            box.appendChild(yMarker)
+          }
+          player1Boxes.push(Number(box.id))
+        }
 
-      else if (turn%2!==0){
-        box.appendChild(yMarker)
+        else if (turn%2!==0){
+          if (player2Marker==="X"){
+            box.appendChild(xMarker)
+          }
+          else if (player2Marker==="O"){
+            box.appendChild(yMarker)
+          }
+          player2Boxes.push(Number(box.id))
+        }
+        boxesleft-=1;
+        switchTurn()
+        checkWinner()
+        console.log(player1Boxes)
+        console.log(player2Boxes)
+
       }
-      switchTurn()
     }
     
     gameBoxes.forEach((box)=>{
-      if (box.hasChildNodes()!==true){
-        box.addEventListener('click', makeMove.bind(null,box))
-      }
-      else if (box.hasChildNodes()){
+      if (box.hasChildNodes()){
         return
       }
+      else { box.addEventListener('click', makeMove.bind(null,box))
+      }
     })
-
     
   }
   game()

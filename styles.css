@@ -7,11 +7,15 @@
     width:height;
 }
 
+.box:hover{
+    background-color: pink;
+}
+
 .box{
     border:1px solid black;
 }
 
-#gameend{
+#gameover{
     display:none;
 }
 
@@ -27,6 +31,6 @@
     display:none;
 }
 
-.box:hover{
-    background-color: pink;
+#playerselection{
+    display:none;
 }
