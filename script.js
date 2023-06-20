@@ -167,7 +167,7 @@ const gameBoard = (playersData) => {
       const gameOverPopUp = document.querySelector('#gameover');
       const gameResult = document.querySelector('#gameresult')
       gameOverPopUp.style.display="grid";
-      gameResult.textContent = playerTurn.textContent
+      gameResult.textContent = playerTurn.textContent;
 
       const playAgain=document.querySelector('#playagain');
       const endGame=document.querySelector('#endgame')
@@ -231,15 +231,15 @@ const gameBoard = (playersData) => {
         return subarray.every((value)=>player2Boxes.includes(value))
       })
       if (player1Wins===true){
-        playerTurn.textContent=(player1+" wins!")
+        playerTurn.textContent=(player1+" wins!");
         gameOver()
       }
       else if (player2Wins===true){
-        playerTurn.textContent=(player2+" wins!")
+        playerTurn.textContent=(player2+" wins!");
         gameOver()
       }
       else if (boxesleft<=0){
-        playerTurn.textContent="Tie! No boxes left."
+        playerTurn.textContent="Tie! No boxes left.";
         gameOver()
       }
       
@@ -247,10 +247,13 @@ const gameBoard = (playersData) => {
 
     const makeMove = (box) =>{
       checkWinner()
+      box.classList.remove('unchecked')
       const xMarker=document.createElement('div');
+      xMarker.classList.add('Xmark');
       xMarker.textContent="X";
       const yMarker=document.createElement('div');
-      yMarker.textContent="O"
+      yMarker.classList.add('Omark');
+      yMarker.textContent="O";
       
       /* if the box is empty, player is allowed to add their marker. this is already checked
       when adding the event listeners below so i'm not sure if thisnis necessary */
@@ -289,7 +292,8 @@ const gameBoard = (playersData) => {
       if (box.hasChildNodes()){
         return
       }
-      else { box.addEventListener('click', makeMove.bind(null,box))
+      else { 
+        box.addEventListener('click', makeMove.bind(null,box))
       }
     })
     

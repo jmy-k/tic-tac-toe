@@ -1,24 +1,67 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
+    display:grid;
+    grid-template-rows:0.5fr 3fr;
+    height:100vh;
+    width:auto;
+    justify-content:center;
 }
 
-
+#turn {
+    grid-row:1/2;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-size: 6vw;
+    font-weight: bold;
+    color: #042f2e;
+}
 
 #gameboard{
-    position: absolute;
-    top: 10%;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: 1rem;
-    /* border: 1px dotted green; */
-    display: none;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
+    grid-row:2/3;
+
+    height:80vh;
+
+    display: none; /* becomes grid when game starts */
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap:10px;
     border-radius: 6px;
+    aspect-ratio:1/1; /* maintains square */
 }
 
+.unchecked:hover{
+    background-color: #0f766e;
+}
+
+.box{
+    position: relative;
+    background-color: #115e59;
+    border-radius: 4px;
+
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+/* markers */
+.Xmark, .Omark {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30vh;
+}
+
+.Xmark{
+  color:#042f2e;
+}
+
+.Omark{
+  color:#5eead4;
+}
+
+/* start page */
 .opening{
     font-size:40px;
     position:fixed;
@@ -30,45 +73,33 @@ body{
     display:flex;
     align-items: center;
     flex-direction: column;
+  gap:10px;
 }
 
-.box:hover{
-    background-color: pink;
+.title{
+  color: #115e59;
 }
 
-.box{
-    position: relative;
-    background-color: rgb(162, 206, 221);
-    border-radius: 4px;
-
-    display:flex;
-    justify-content: center;
-}
-
-#gameover{
-    display:none;
-}
-
+/* "Start" button */
 #start{
     display:block;
+    border-radius:50px;
+    border:none;
+    padding:10px;
+    width:80%;
+    background-color:#115e59;
+    color:#ccfbf1;
 }
 
-#player1alert , #player2alert{
-    display:none;
-}
 
-#player1markeralert , #player2markeralert{
-    display:none;
-}
-
+/* player info box and game end pop up boxes */
 #playerselection , #gameover{
     display:none;
     position: fixed;
     top:50%;
     left:50%;
-    margin-top: -75px;
-    margin-left: -100px;
-    transform: translate(-25%, 5%);
+    
+    transform: translate(-50%,-50%);
     
     z-index: 2;
     align-content:center;
@@ -76,16 +107,20 @@ body{
 
 fieldset{
     display:grid;
-    gap:10px;
-
     grid-template-columns: 1fr 1fr;
-    grid-template-rows:1fr 0.5fr;
+    grid-template-rows:2fr 0.5fr;
+    gap:10px;
+  
+    border:none;
     border-radius: 25px;
     padding:20px;
 
-    background-color: #14b8a6;
+    background-color: #0f766e;
+    color:#042f2e;
 }
 
+
+/* one section for each player */
 .player1, .player2{
     grid-row:1/2;
     display:grid;
@@ -102,6 +137,22 @@ fieldset{
     grid-column:2/3
 }
 
+/* text input boxes for player names */
+#player1 , #player2{
+    height:100%;
+    border-radius:25px;
+    border:none;
+    padding:5px;
+    color:#042f2e;
+}
+
+/* remove default styling when the input box is clicked into */
+#player1:focus, #player2:focus{
+    outline:none;
+    box-shadow:0 0 5px 0px #99f6e4;
+}
+
+/* reset selection and let's go button */
 .formbuttons{
     grid-column:1/3;
     grid-row:2/3;
@@ -111,34 +162,102 @@ fieldset{
     justify-items:center;
 }
 
+#resetselection, #startgame{
+  border-radius:50px;
+  padding:10px;
+  border:none;
+  width:80%;
+  color:#042f2e;
+}
+
+/* grid items that are also grids for organizing */
 .player1name, .player2name, .player1marker , .player2marker{
     display:grid;
     grid-template-rows: 1fr 0.5fr;
+    gap:5px;
 }
 
+/* create more space between the player name inputs and marker selection */
+.player1name, .player2name {
+  padding:10px;
+}
+
+/* section for marker selection */
+.radiobuttons{
+  font-size:20px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
+  grid-template-rows:1fr;
+  
+  margin:auto;
+  gap:10px;
+}
+
+/* trying to align/center these labels so they're aligned with the radios */
+.playerchoice, .radiobuttons label{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* remove default styling of radio buttons */
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:16px;
+    height:16px;
+    border:2px solid #042f2e;
+    border-radius:50%;
+    outline:none;
+}
+
+/* lil shadow for when cursor goes over the radio */
+input[type='radio']:hover {
+    box-shadow:0 0 5px 0px #99f6e4 inset;
+}
+
+input[type='radio']:before {
+    content:'';
+    display:block;
+    width:60%;
+    height:60%;
+    margin: 20% auto;    
+    border-radius:50%;    
+}
+
+/* selected radio button */
+input[type='radio']:checked:before {
+    background: #083344;
+}
+
+/* doesn't appear unless validation is false */
 #player1alert , #player2alert, #player1markeralert, #player2markeralert{
+    display:none;
     font-size: 10px;
-    color:red;
+    color:#ccfbf1;
 }
 
+/* pops up only when game ends */
 #gameover{
-    display:none;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 0.5fr;
     gap:10px;
-    width:20vw;
     align-items: center;
 
+    border:none;
     border-radius: 25px;
     padding:20px;
+   width:30vw;
 
-    background-color: #14b8a6;
+    background-color: #0f766e;
+    color:#042f2e;
 }
 
+/* lists who wins or if it's a tie */
 #gameresult{
     grid-row:1/2;
     grid-column:1/3;
     text-align: center;
+  font-weight:bolder;
 }
 
 #playagainquestion{
@@ -147,7 +266,42 @@ fieldset{
     text-align: center;
 }
 
+/* yes or no buttons */
 .gameoverbuttons{
     grid-row:3/4;
-    grid-column:1/3
+    grid-column:1/3;
+      
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+  
+    color: #042f2e;
+}
+
+#gameresult{
+  font-size:5vw;
+}
+
+#playagainquestion {
+  font-size:4vw;
+}
+
+#playagain{
+  grid-column:1/2;
+}
+#endgame{
+  grid-column:2/3;
+}
+
+#playagain, #endgame{
+  color:#042f2e;
+  background-color: #f0fdfa;
+  border-radius:25px;
+  border:none;
+  padding:5px;
+}
+
+/* shadow for hovering over buttons */
+#playagain:hover, #endgame:hover, #resetselection:hover, #startgame:hover, #start:hover {
+   box-shadow:0 0 5px 0px #99f6e4;
 }

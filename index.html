@@ -20,10 +20,13 @@
                 </div>
               <div class="player1marker">
                   <div class="radiobuttons">
-                      <input type="radio" name="player1-symbol" value="X" id="player1-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-X', 'player2-X', 'player2-O')">
-                      <label for="player1-X">X</label>
-                      <input type="radio" name="player1-symbol" value="O" id="player1-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-O', 'player2-O', 'player2-X')">
-                      <label for="player1-O">O</label>
+                      
+                          <input type="radio" name="player1-symbol" value="X" id="player1-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-X', 'player2-X', 'player2-O')">
+                          <label for="player1-X">X</label>
+                      
+                          <input type="radio" name="player1-symbol" value="O" id="player1-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player1-O', 'player2-O', 'player2-X')">
+                          <label for="player1-O">O</label>
+                      
                   </div>
                   <div id="player1markeralert">Please select a marker!</div>
               </div>
@@ -37,10 +40,13 @@
               
               <div class="player2marker">
                   <div class="radiobuttons">
-                      <input type="radio" name="player2-symbol" value="X" id="player2-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-X', 'player1-X', 'player1-O')">
-                      <label for="player2-X">X</label>
-                      <input type="radio" name="player2-symbol" value="O" id="player2-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-O', 'player1-O', 'player1-X')">
-                      <label for="player2-O">O</label>
+                      
+                          <input type="radio" name="player2-symbol" value="X" id="player2-X" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-X', 'player1-X', 'player1-O')">
+                          <label for="player2-X">X</label>
+                      
+                          <input type="radio" name="player2-symbol" value="O" id="player2-O" class="playerchoice" onclick=" playerSelectionModule.disableOppositeOptions('player2-O', 'player1-O', 'player1-X')">
+                          <label for="player2-O">O</label>
+                      
                   </div>
                   <div id="player2markeralert">Please select a marker!</div>
               </div>
@@ -53,6 +59,7 @@
             
         </fieldset>
     </form>
+    <div id="turn"></div>
     <div id="gameover">
         <div id="gameresult"></div>
         <div id="playagainquestion">Play Again?</div>
@@ -61,17 +68,16 @@
             <button type="button" id="endgame">No</button>
         </div>
     </div>
-    <div id="turn"></div>
     <div id="gameboard">
-        <div class="box" id="1"></div>
-        <div class="box" id="2"></div>
-        <div class="box" id="3"></div>
-        <div class="box" id="4"></div>
-        <div class="box" id="5"></div>
-        <div class="box" id="6"></div>
-        <div class="box" id="7"></div>
-        <div class="box" id="8"></div>
-        <div class="box" id="9"></div>
+        <div class="box unchecked" id="1"></div>
+        <div class="box unchecked" id="2"></div>
+        <div class="box unchecked" id="3"></div>
+        <div class="box unchecked" id="4"></div>
+        <div class="box unchecked" id="5"></div>
+        <div class="box unchecked" id="6"></div>
+        <div class="box unchecked" id="7"></div>
+        <div class="box unchecked" id="8"></div>
+        <div class="box unchecked" id="9"></div>
     </div>
    <script src="script.js"></script>
 </body>
